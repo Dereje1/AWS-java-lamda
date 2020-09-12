@@ -25,9 +25,10 @@ const postLambda = async ({principal, rate, period }) => {
     submitButton.style.visibility = 'hidden';
     console.log('Fetching....')
     const fetchResponse = await fetch(endpoint,settings)
-    const response = await fetchResponse.json();
+    const response = await fetchResponse.json()
+    const {interestPaid,payment,principal,rate,period} = JSON.parse(response) ;
     submitButton.style.visibility = 'visible';
-    console.log(response)
+    console.log({interestPaid,payment,principal,rate,period})
     } catch (error) {
         console.log(error)
     }

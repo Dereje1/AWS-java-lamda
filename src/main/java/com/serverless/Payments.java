@@ -1,6 +1,7 @@
 package com.serverless;
 
 import java.text.NumberFormat;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Payments {
     int principal, periodInYears;
@@ -15,27 +16,60 @@ public class Payments {
         annualRate = R;
     }
 
-    public void printOutput(float[] result){
-        System.out.println(
-        "\nPrincipal: " + NumberFormat.getCurrencyInstance().format(principal)
-         + "; Annual Rate: " + annualRate + "%"
-         + "; Loan Period: " + periodInYears + " years"
-         );
-        String formattedMonthlyPayment = NumberFormat.getCurrencyInstance().format(result[0]);
-        String formattedInterestPaid = NumberFormat.getCurrencyInstance().format(result[1]);
-        System.out.println("Monthly Payment: " + formattedMonthlyPayment);
-        System.out.println("Total Interest Paid: " + formattedInterestPaid);
+    public class FormatResponse {
+        float monthlyPayment;
+        float interestPaid;
+       // int principal;
+
+        public float getPayment() {
+            return monthlyPayment;
+        }
+        public void setPayment(float payment) {
+            this.monthlyPayment = payment;
+        }
+    
+        public float getInterestPaid() {
+            return interestPaid;
+        }
+        public void setInterestPaid(float interestPaid) {
+            this.interestPaid = interestPaid;
+        }
+
+        public int getPrincipal(){
+            return principal;
+        }
+        public float getRate(){
+            return annualRate;
+        }
+        public int getPeriod(){
+            return periodInYears;
+        }
     }
 
-    public float[] computePayment(){
-        // rateExpression = (1+r)^n
-        float monthlyRate = annualRate/PERCENT/NUMBER_OF_MONTHS_IN_YEAR;
-        int periodInMonths = periodInYears * NUMBER_OF_MONTHS_IN_YEAR;
-        float rateExpression = (float) Math.pow(1+monthlyRate, periodInMonths);
-        float monthlyPayment = principal *((monthlyRate * rateExpression)/(rateExpression - 1));
-        float interestPaid = (monthlyPayment * periodInMonths) - principal;
 
-        float[] val = {monthlyPayment, interestPaid};
-        return val;
+    public String computePayment(){
+        try {
+            // rateExpression = (1+r)^n
+            float monthlyRate = annualRate/PERCENT/NUMBER_OF_MONTHS_IN_YEAR;
+            int periodInMonths = periodInYears * NUMBER_OF_MONTHS_IN_YEAR;
+            float rateExpression = (float) Math.pow(1+monthlyRate, periodInMonths);
+            float monthlyPayment = principal *((monthlyRate * rateExpression)/(rateExpression - 1));
+            float interestPaid = (monthlyPayment * periodInMonths) - principal;
+
+            float[] val = {monthlyPayment, interestPaid};
+
+            FormatResponse formattedResponse = new FormatResponse();
+            formattedResponse.setPayment(monthlyPayment);
+            formattedResponse.setInterestPaid(interestPaid);
+            //Creating the ObjectMapper object
+            ObjectMapper mapper = new ObjectMapper();
+            //Converting the Object to JSONString
+            String jsonString = mapper.writeValueAsString(formattedResponse);
+            return jsonString;
+        } catch (Exception e) {
+            System.out.println("Error >>>>>>>>>>>>>>" + e);
+            return "Error";
+        }
+
     }
 }
