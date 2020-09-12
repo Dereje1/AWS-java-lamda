@@ -6,6 +6,11 @@ package:
   artifact: target/lambda-calculator-dev.jar
 functions:
   payments:
-    handler: com.serverless.Handler
+    handler: com.serverless.PaymentsHandler
+    events:
+      - http:
+          path: /
+          method: post
+          cors: true
 plugins:
   - serverless-offline 
