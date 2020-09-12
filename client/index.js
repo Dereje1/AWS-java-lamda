@@ -1,3 +1,7 @@
+const submitButton = document.getElementById("submit")
+const principalInput = document.getElementById("principal")
+const rateInput = document.getElementById("rate")
+const periodInput = document.getElementById("period")
 
 let connection =''
 
@@ -7,25 +11,31 @@ if (!location.host || location.hostname === "localhost" || location.hostname ===
     connection = `https://jawtd7ia9a.execute-api.us-east-1.amazonaws.com/dev/`
 }
 
-const postLambda = async () => {
+const postLambda = async ({principal, rate, period }) => {
     const settings = {
         method: 'POST',
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({principal: 30000, rate: 3, period: 10 })
+        body: JSON.stringify({principal, rate, period})
     };
     const endpoint = `${connection}`
     try {
-    console.log('Fetching.....')
+    submitButton.disabled = true
     const fetchResponse = await fetch(endpoint,settings)
     const response = await fetchResponse.json();
+    submitButton.disabled = false
     console.log(response)
     } catch (error) {
         console.log(error)
     }
 }
 
-window.onload=()=>postLambda();
-//submitSquare.addEventListener('click',postLambda)
+const validateAndSubmit = () => {
+    const obj = {principal: principalInput.value, rate: rateInput.value, period: periodInput.value }
+    console.log(obj)
+    postLambda(obj)
+}
+
+submitButton.addEventListener('click',()=> validateAndSubmit());

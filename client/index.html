@@ -10,12 +10,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href="style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div id="root">
+      <div id="input-holder">
+        <section>
+          <input  id="principal" class="input-boxes" type="number">
+          <span class="input-description">Principal ($)</span>
+        </section>
+        <section>
+          <input id="rate" class="input-boxes" type="number">
+          <span class="input-description">Rate (%annual)</span>
+        </section>
+        <section>
+          <input id="period" class="input-boxes" type="number">
+          <span class="input-description">Period (years)</span>
+        </section>
+        <button id="submit">Get Payments</button>
+      </div>
 
     </div>
+
   <script src="index.js"></script>
 </body>
 

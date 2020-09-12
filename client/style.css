@@ -1,3 +1,15 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 body{
     margin:0;
   }
@@ -8,5 +20,43 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #dadaf1;
+    background: #e9e9eb;
+}
+
+#input-holder{
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* background: rgb(31, 63, 31); */
+}
+
+.input-boxes{
+    height: 70px;
+    width: 300px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: inherit;
+    outline: none;
+    font-family: 'Crimson Text', serif;
+    color: #3a3737;
+    font-size: 36px;
+}
+
+.input-description{
+    display: inline-block;
+    width:200px;
+    font-size: 28px;
+    margin-top: 1px;
+}
+
+#submit{
+    margin-top: 50px;
+    width: 300px;
+    height: 100px;
+    cursor: pointer;
+    font-size: 36px;
 }
