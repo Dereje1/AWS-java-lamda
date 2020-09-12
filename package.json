@@ -1,0 +1,14 @@
+{
+  "name": "aws-java-lambda-calculator",
+  "version": "1.0.0",
+  "description": "An AWS lambda calculator with java runtime",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dereje",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-offline": "^6.7.0"
+  }
+}
