@@ -22,10 +22,11 @@ const postLambda = async ({principal, rate, period }) => {
     };
     const endpoint = `${connection}`
     try {
-    submitButton.disabled = true
+    submitButton.style.visibility = 'hidden';
+    console.log('Fetching....')
     const fetchResponse = await fetch(endpoint,settings)
     const response = await fetchResponse.json();
-    submitButton.disabled = false
+    submitButton.style.visibility = 'visible';
     console.log(response)
     } catch (error) {
         console.log(error)
@@ -33,9 +34,9 @@ const postLambda = async ({principal, rate, period }) => {
 }
 
 const validateAndSubmit = () => {
-    const obj = {principal: principalInput.value, rate: rateInput.value, period: periodInput.value }
-    console.log(obj)
-    postLambda(obj)
+    const input = {principal: principalInput.value, rate: rateInput.value, period: periodInput.value }
+    const isMissing = Object.keys(input).some(val => !Boolean(input[val]))
+    return isMissing ? null : postLambda(input)
 }
 
-submitButton.addEventListener('click',()=> validateAndSubmit());
+submitButton.addEventListener('click',validateAndSubmit);
