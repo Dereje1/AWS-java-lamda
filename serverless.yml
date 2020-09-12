@@ -3,9 +3,9 @@ provider:
   name: aws
   runtime: java8
 package:
-  artifact: target/hello-dev.jar
+  artifact: target/lambda-calculator-dev.jar
 functions:
-  hello:
+  payments:
     handler: com.serverless.Handler
 plugins:
   - serverless-offline 
