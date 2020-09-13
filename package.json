@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "mvn clean install && sls deploy && aws s3 sync ./client  s3://interest-calculator-ui/"
+    "deploy": "mvn clean install && sls deploy && aws s3 sync ./client  s3://interest-calculator-ui/",
+    "coverage": "mvn clean jacoco:prepare-agent install jacoco:report"
   },
   "author": "Dereje",
   "license": "ISC",

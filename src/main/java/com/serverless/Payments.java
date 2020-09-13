@@ -56,8 +56,6 @@ public class Payments {
             float monthlyPayment = principal *((monthlyRate * rateExpression)/(rateExpression - 1));
             float interestPaid = (monthlyPayment * periodInMonths) - principal;
 
-            float[] val = {monthlyPayment, interestPaid};
-
             FormatResponse formattedResponse = new FormatResponse();
             formattedResponse.setPayment(monthlyPayment);
             formattedResponse.setInterestPaid(interestPaid);
