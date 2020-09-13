@@ -25,7 +25,7 @@ const postLambda = async ({principal, rate, period }) => {
     try {
     submitButton.style.visibility = 'hidden';
     output.style.visibility = 'visible';
-    runSpinner();
+    output.innerHTML = `<div class="spin"></div>`;
     const fetchResponse = await fetch(endpoint,settings)
     const response = await fetchResponse.json()
     const {interestPaid,payment,principal,rate,period} = JSON.parse(response) ;
@@ -40,7 +40,10 @@ const postLambda = async ({principal, rate, period }) => {
 const validateAndSubmit = () => {
     const input = {principal: principalInput.value, rate: rateInput.value, period: periodInput.value }
     const isMissing = Object.keys(input).some(val => !Boolean(input[val]))
-    if(isMissing) return null;
+    if(isMissing) {
+        output.style.visibility = 'hidden';
+        return null;
+    }
     if(input.principal < 1000 || input.principal > 1000000){
         principalInput.style.background = '#ff00002e'
         output.style.visibility = 'hidden';
@@ -63,11 +66,6 @@ const validateAndSubmit = () => {
     periodInput.style.background = 'none'
 
     return postLambda(input)
-}
-
-const runSpinner = () => {
-    const html = `<div class="spin"></div>`
-    output.innerHTML = html;
 }
 
 const updateOutPut = ({interestPaid,payment,principal,rate,period}) => {

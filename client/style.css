@@ -31,8 +31,8 @@ body{
 #input-holder{
     margin:0 auto;
     padding-top: 20px;
-    height: 500px;
-    width: 500px;
+    height: auto;
+    width: 350px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -40,10 +40,11 @@ body{
 
 #output-holder{
   margin:0 auto;
+  margin-top: 20px;
   visibility: hidden;
   padding: 20px;
-  height: 200px;
-  width: 400px;
+  height: auto;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -51,8 +52,7 @@ body{
   background: white;
   font-family: 'Crimson Text', serif;
   color: #545454;
-  font-size: 24px;
-  box-shadow: 5px 5px #888888;
+  font-size: 1.5em;
   border-radius: 20px;
 }
 
@@ -75,13 +75,13 @@ body{
     display: inline-block;
     width:250px;
     font-size: 2rem;
-    margin-top: 10px;
+    margin-top: 50px;
     font-family: 'Crimson Text', serif;
 }
 
 button{
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 75px;
   background: red;
   border: none;
   outline: none;
@@ -94,12 +94,13 @@ button{
   color: #1abc9c;
   letter-spacing: 1px;
   text-shadow: 0;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
-  -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
-      font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  
+  -webkit-transition: all 0.25s ease;
 }
 
 hr {
