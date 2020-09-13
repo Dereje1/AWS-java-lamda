@@ -38,6 +38,24 @@ body{
     justify-content: space-around;
 }
 
+#output-holder{
+  margin:0 auto;
+  visibility: hidden;
+  padding: 20px;
+  height: 200px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  background: white;
+  font-family: 'Crimson Text', serif;
+  color: #545454;
+  font-size: 24px;
+  box-shadow: 5px 5px #888888;
+  border-radius: 20px;
+}
+
 .input-boxes{
     height: 70px;
     width: 300px;
@@ -84,7 +102,53 @@ button{
       font-family: 'Roboto', sans-serif;
 }
 
+hr {
+  border: 0;
+  width: 100%;               
+  background-color:black;
+  height: 1px;
+}
+
 button:hover {
   color: white;
   background: #1abc9c;
+}
+
+.output-style{
+  margin: 5px;
+}
+
+.output-style-results{
+  margin: 5px;
+  color: #54548e;
+}
+
+.spin {
+  margin: 0 auto;
+  border: 7px solid #0042A4;
+  border-radius: 50%;
+  border-top: 7px solid #3775CF;
+  border-right: 7px solid #619BEE;
+  border-bottom: 7px solid #96BFF9;
+  border-left: 7px solid #C9E0FF;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

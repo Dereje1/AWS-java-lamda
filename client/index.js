@@ -2,6 +2,7 @@ const submitButton = document.getElementById("submit")
 const principalInput = document.getElementById("principal")
 const rateInput = document.getElementById("rate")
 const periodInput = document.getElementById("period")
+const output = document.getElementById("output-holder")
 
 let connection =''
 
@@ -23,21 +24,47 @@ const postLambda = async ({principal, rate, period }) => {
     const endpoint = `${connection}`
     try {
     submitButton.style.visibility = 'hidden';
-    console.log('Fetching....')
+    output.style.visibility = 'visible';
+    runSpinner();
     const fetchResponse = await fetch(endpoint,settings)
     const response = await fetchResponse.json()
     const {interestPaid,payment,principal,rate,period} = JSON.parse(response) ;
     submitButton.style.visibility = 'visible';
-    console.log({interestPaid,payment,principal,rate,period})
+    updateOutPut({interestPaid,payment,principal,rate,period})
     } catch (error) {
         console.log(error)
     }
 }
 
+
 const validateAndSubmit = () => {
     const input = {principal: principalInput.value, rate: rateInput.value, period: periodInput.value }
     const isMissing = Object.keys(input).some(val => !Boolean(input[val]))
     return isMissing ? null : postLambda(input)
+}
+
+const runSpinner = () => {
+    const html = `<div class="spin"></div>`
+    output.innerHTML = html;
+}
+
+const updateOutPut = ({interestPaid,payment,principal,rate,period}) => {
+
+    // Create our number formatter.
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+  
+    const html = `
+    <span class="output-style"> Principal: ${formatter.format(principal)}</span>
+    <span class="output-style"> Interest Rate: ${rate.toFixed(2)}%</span>
+    <span class="output-style"> Period: ${period} years</span>
+    <hr/>
+    <span class="output-style-results"> Monthly Payment: ${formatter.format(payment)}</span>
+    <span class="output-style-results"> Interest Paid: ${formatter.format(interestPaid)}</span>
+    `
+    output.innerHTML = html;
 }
 
 submitButton.addEventListener('click',validateAndSubmit);
