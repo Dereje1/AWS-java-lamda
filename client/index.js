@@ -40,7 +40,29 @@ const postLambda = async ({principal, rate, period }) => {
 const validateAndSubmit = () => {
     const input = {principal: principalInput.value, rate: rateInput.value, period: periodInput.value }
     const isMissing = Object.keys(input).some(val => !Boolean(input[val]))
-    return isMissing ? null : postLambda(input)
+    if(isMissing) return null;
+    if(input.principal < 1000 || input.principal > 1000000){
+        principalInput.style.background = '#ff00002e'
+        output.style.visibility = 'hidden';
+        return null;
+    }
+
+    if(input.rate < 0 || input.rate > 30){
+        rateInput.style.background = '#ff00002e'
+        output.style.visibility = 'hidden';
+        return null;
+    }
+
+    if(input.period < 1 || input.period > 30){
+        periodInput.style.background = '#ff00002e'
+        output.style.visibility = 'hidden';
+        return null;
+    }
+    principalInput.style.background = 'none'
+    rateInput.style.background = 'none'
+    periodInput.style.background = 'none'
+
+    return postLambda(input)
 }
 
 const runSpinner = () => {
@@ -68,3 +90,7 @@ const updateOutPut = ({interestPaid,payment,principal,rate,period}) => {
 }
 
 submitButton.addEventListener('click',validateAndSubmit);
+
+[principalInput, rateInput, periodInput].forEach(inputType => {
+    inputType.addEventListener('input', () => inputType.style.background = 'none')
+})
