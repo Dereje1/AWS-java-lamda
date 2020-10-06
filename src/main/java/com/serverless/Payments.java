@@ -1,6 +1,5 @@
 package com.serverless;
 
-import java.text.NumberFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Payments {
@@ -65,7 +64,7 @@ public class Payments {
             String jsonString = mapper.writeValueAsString(formattedResponse);
             return jsonString;
         } catch (Exception e) {
-            System.out.println("Error >>>>>>>>>>>>>>" + e);
+            System.out.println("Error computing payments" + e);
             return "Error";
         }
 
