@@ -1,0 +1,16 @@
+{
+  "name": "aws-java-lambda-calculator",
+  "version": "1.0.0",
+  "description": "An AWS lambda calculator with java runtime",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "mvn clean install && sls deploy && aws s3 sync ./client  s3://interest-calculator-ui/",
+    "coverage": "mvn clean jacoco:prepare-agent install jacoco:report"
+  },
+  "author": "Dereje",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-offline": "^6.7.0"
+  }
+}

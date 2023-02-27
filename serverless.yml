@@ -1,0 +1,16 @@
+service: lambda-calculator
+provider:
+  name: aws
+  runtime: java8
+package:
+  artifact: target/lambda-calculator-dev.jar
+functions:
+  payments:
+    handler: com.serverless.PaymentsHandler
+    events:
+      - http:
+          path: /
+          method: post
+          cors: true
+plugins:
+  - serverless-offline 
